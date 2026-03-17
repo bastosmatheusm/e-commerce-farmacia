@@ -12,14 +12,14 @@ export class CategoriaService {
 
   async findAll(): Promise<Categoria[]> {
     return this.categoriaRepository.find({ 
-        //relations: { produtos: true } 
+        relations: { produtos: true } 
     });
   }
 
   async findById(id: number): Promise<Categoria> {
     const categoria = await this.categoriaRepository.findOne({
       where: { id },
-      //relations: { produtos: true },
+      relations: { produtos: true },
     });
     if (!categoria)
       throw new HttpException('Categoria não encontrada!', HttpStatus.NOT_FOUND);
@@ -29,7 +29,7 @@ export class CategoriaService {
   async findByNome(nome: string): Promise<Categoria[]> {
     return this.categoriaRepository.find({
       where: { nome: ILike(`%${nome}%`) },
-      //relations: { produtos: true },
+      relations: { produtos: true },
     });
   }
 
